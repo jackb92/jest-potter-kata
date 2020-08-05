@@ -40,6 +40,6 @@ test('Only unique books get discount', () => {
   expect(basket(['book1', 'book1', 'book1', 'book3', 'book1'])).toBe(39.2)
 })
 
-test('test', () => {
-  expect(basket(['book1', 'book1', 'book2', 'book2', 'book3', 'book3', 'book4', 'book5'])).toBe(39.2)
-})
+// test('test', () => {
+//   expect(basket(['book1', 'book1', 'book2', 'book2', 'book3', 'book3', 'book4', 'book5'])).toBe(39.2)
+// })
