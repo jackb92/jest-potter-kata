@@ -1,27 +1,49 @@
-//const uniqueBookCount = require('./uniqueBooks');
+const price = 8;
 
-var price = 8
+function basket(bookArray) {
+  const price = 8;
 
-var unique = (value, index, self) => {
-  return self.indexOf(value) === index
-  }
+  let booksToFilter = [...bookArray];
+  let bookGroups = [];
 
-function basket(arr) {
-  var uniqueCount = arr.filter(unique).length
+  while (booksToFilter.length > 0) {
+    const bookToInterigate = booksToFilter.shift();
+    let found = false;
 
-  if(uniqueCount === 2){
-    return (price * arr.length) - ((price * uniqueCount) * 0.05)
+    for(let i = 0; i < bookGroups.length; i++) {
+      if(!bookGroups[i].includes(bookToInterigate)){
+        found = true;
+        bookGroups[i] = [...bookGroups[i], bookToInterigate];
+        break;
+      }
+    }
+      if(!found) {
+        bookGroups = [...bookGroups, [bookToInterigate]];
+      }
   }
-  else if(uniqueCount === 3){
-    return (price * arr.length) - ((price * uniqueCount) * 0.1)
+  const priceArray = []
+
+  for(var i = 0; i < bookGroups.length; i++){
+    let noneDiscountedPrice = price * bookGroups[i].length
+    
+    if(bookGroups[i].length === 2){
+      priceArray.push(noneDiscountedPrice - (price * bookGroups.length) * 0.05)
+    }
+    else if(bookGroups[i].length === 3){
+      priceArray.push(noneDiscountedPrice - (price * bookGroups.length) * 0.1)
+    }
+    else if(bookGroups[i].length === 4){
+      priceArray.push(noneDiscountedPrice - (price * bookGroups.length) * 0.2)
+    }
+    else if(bookGroups[i].length === 5){
+      priceArray.push(noneDiscountedPrice - (price * bookGroups.length) * 0.25)
+    }
+    else{
+      priceArray.push(noneDiscountedPrice) 
+    }
   }
-  else if(uniqueCount === 4){
-    return (price * arr.length) - ((price * uniqueCount) * 0.2)
-  }
-  else if(uniqueCount === 5){
-    return (price * arr.length) - ((price * uniqueCount) * 0.25)
-  }
-  else return (price * arr.length)
+  const result = priceArray.reduce((acc, val) => acc + val, 0)
+  return result
 }
 
 module.exports = basket;
