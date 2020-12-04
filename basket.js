@@ -1,9 +1,7 @@
-const price = 8;
-
 function basket(bookArray) {
   const price = 8;
 
-  let booksToFilter = [...bookArray];
+  let booksToFilter = bookArray;
   let bookGroups = [];
 
   while (booksToFilter.length > 0) {
@@ -21,29 +19,29 @@ function basket(bookArray) {
         bookGroups = [...bookGroups, [bookToInterigate]];
       }
   }
-  const priceArray = []
+  const priceArray = [];
 
   for(var i = 0; i < bookGroups.length; i++){
-    let noneDiscountedPrice = price * bookGroups[i].length
+    const noneDiscountedPrice = price * bookGroups[i].length
     
     if(bookGroups[i].length === 2){
-      priceArray.push(noneDiscountedPrice - (noneDiscountedPrice) * 0.05)
+      priceArray.push(noneDiscountedPrice - (noneDiscountedPrice) * 0.05);
     }
     else if(bookGroups[i].length === 3){
-      priceArray.push(noneDiscountedPrice - (noneDiscountedPrice) * 0.1)
+      priceArray.push(noneDiscountedPrice - (noneDiscountedPrice) * 0.1);
     }
     else if(bookGroups[i].length === 4){
-      priceArray.push(noneDiscountedPrice - (noneDiscountedPrice) * 0.2)
+      priceArray.push(noneDiscountedPrice - (noneDiscountedPrice) * 0.2);
     }
     else if(bookGroups[i].length === 5){
-      priceArray.push(noneDiscountedPrice - (noneDiscountedPrice) * 0.25)
+      priceArray.push(noneDiscountedPrice - (noneDiscountedPrice) * 0.25);
     }
     else{
-      priceArray.push(noneDiscountedPrice) 
+      priceArray.push(noneDiscountedPrice);
     }
   }
-  const result = priceArray.reduce((acc, val) => acc + val, 0)
-  return result
+  const result = priceArray.reduce((acc, val) => acc + val, 0);
+  return result;
 }
 
 module.exports = basket;
